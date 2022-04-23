@@ -1,9 +1,8 @@
 let components = []
 let files = import.meta.globEager('./components/**/*.vue')
-debugger
-// files.keys().forEach(key=>{
-//   components.push(files(key).default)
-// })
+Object.keys(files).forEach(key=>{
+  components.push(files[key].default)
+})
 
 const install = (Vue)=>{
   components.forEach(component=>{
@@ -11,6 +10,6 @@ const install = (Vue)=>{
   })
 }
 
-// import './icon-color.js'
+import './icons/index.js';
 
 export default { install }

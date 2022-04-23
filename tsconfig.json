@@ -14,6 +14,6 @@
     "lib": ["esnext", "dom"],
     "skipLibCheck": true
   },
-  "include": ["package/**/*.ts", "package/**/*.d.ts", "package/**/*.tsx", "package/**/*.vue", "package/components/table/tbody.jsx", "package/components/table/thead.jsx"],
+  "include": ["package/**/*.ts", "package/**/*.d.ts", "package/**/*.tsx", "package/**/*.jsx", "package/**/*.vue"],
   "references": [{ "path": "./tsconfig.node.json" }]
 }
