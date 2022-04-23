@@ -16,7 +16,7 @@ jobs:
         with:
           node-version: 14.19.1
           registry-url: https://registry.npmjs.org/
-      - run: npm install pnpm -g
+      - run: npm install -g pnpm@next-7
       - run: pnpm install
       - run: pnpm run build
       - run: npm publish
