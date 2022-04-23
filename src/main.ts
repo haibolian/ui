@@ -1,4 +1,9 @@
 import { createApp } from 'vue'
 import App from './App.vue'
 
-createApp(App).mount('#app')
+import LUI from "../package/index"
+
+const app = createApp(App).mount('#app')
+
+app.use(LUI)
+

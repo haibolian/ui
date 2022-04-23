@@ -1,0 +1,55 @@
+@import './single-icon.css';
+@import './menu.scss';
+@import './radio.scss';
+@import './input.scss';
+@import './variables.scss';
+@import './checkbox.scss';
+@import './select.scss';
+@import './animation.scss';
+@import './tabs.scss';
+@import './card.scss';
+@import './shadow.scss';
+@import './button.scss';
+@import './form.scss';
+@import './switch.scss';
+@import './counter.scss';
+@import './pagination.scss';
+@import './progress.scss';
+@import './table.scss';
+@import './dock.scss';
+
+*{
+  margin: 0;
+  padding: 0;
+  outline: none;
+}
+
+.l-color-icon-svg {
+  width: 1em; 
+  height: 1em;
+  vertical-align: -0.15em;
+  fill: currentColor;
+  overflow: hidden;
+}
+
+.is-active{
+  background-color: $color-main;
+  color: #fff;
+}
+
+ul{
+  list-style: none;
+}
+
+.is-left {
+  text-align: left;
+}
+
+.is-center {
+  text-align: center;
+}
+
+.is-right {
+  text-align: right;
+}
+

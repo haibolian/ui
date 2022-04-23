@@ -1,0 +1,94 @@
+@import './variables.scss';
+@mixin button-theme($color: $color-main) {
+  background-color: $color;
+  border-color: $color;
+  color: #fff;
+  &.is-plain {
+    background-color: rgba($color: $color, $alpha: 0.2);
+    color: $color;
+    border-color: $color;
+  }
+  &.l-button:not(.is-disabled){
+    &:hover {
+      color: #fff;
+      border-color: $color;
+      background-color: $color;
+    }
+    &:focus {
+      color: #fff;
+      border-color: $color;
+      background-color: $color;
+    }
+    &:not(.is-plain):focus {
+      opacity: 0.7;
+    }
+  }
+}
+.l-button{
+  color: rgba(0, 0, 0, 0.7);
+  box-sizing: border-box;
+  padding: 5px 15px;
+  font-size: 16px;
+  min-height: 40px;
+  display: inline-block;
+  border-radius: 4px;
+  background-color: #fff;
+  border: 1px solid #dcdfe6;
+  outline: none;
+  & + .l-button {
+    margin-left: 10px;
+  }
+  &.is-circle{
+    border-radius: 50%;
+    padding: 11px;
+  }
+}
+
+// 主题颜色
+.l-button-primary{ 
+ @include button-theme($color-main)
+}
+.l-button-success{ 
+ @include button-theme($color-success)
+}
+.l-button-warning{ 
+ @include button-theme($color-warning)
+}
+.l-button-danger{ 
+ @include button-theme($color-danger)
+}
+// 动作
+.l-button:not(.is-disabled){
+  &:hover, &:focus{
+    background-color: #fff;
+    color: $color-main;
+    border-color: rgba($color: $color-main, $alpha: 1);
+    cursor: pointer;
+    transition: all 0.4s;
+  }
+  &:active{
+    opacity: 0.7;
+  }
+}
+
+// 禁用
+.is-disabled{
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+// 尺寸
+.l-button-medium{
+  min-height: 36px;
+  font-size: 14px;
+}
+
+.l-button-small{
+  min-height: 32px;
+  font-size: 12px;
+}
+
+.l-button-mini{
+  min-height: 28px;
+  font-size: 12px;
+}
