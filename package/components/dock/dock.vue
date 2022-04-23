@@ -3,7 +3,7 @@ import { computed, defineComponent, ref, Teleport } from 'vue'
 export default defineComponent({
   name:'LDock',
   componentName: 'LDock',
-  emits:['boat-click'],
+  emits:['click-boat'],
   components:{
     Teleport
   },

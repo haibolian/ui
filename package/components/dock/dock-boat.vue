@@ -39,7 +39,7 @@ export default defineComponent({
       props.to && router.push(props.to)
     }
     const clickBoat = (ev) => {
-      parent.emit('boat-click', next, ev)
+      parent.emit('click-boat', next, ev)
     }
     
     const isCurrent = () => {
