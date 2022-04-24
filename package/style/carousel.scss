@@ -1,0 +1,71 @@
+@import './variables.scss';
+
+.l-carousel {
+  height: 150px;
+  overflow: hidden;
+}
+
+.l-carousel__wrapper {
+  width: inherit;
+  height: inherit;
+  position: relative;
+}
+
+.l-carousel-item {
+  width: 100%;
+  display: inline-block;
+  position: absolute;
+}
+
+.l-carousel__button-group {
+  padding: 4px 6px;
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  bottom: 5%;
+}
+
+.l-carousel__button {
+  width: 25px;
+  display: inline-block;
+  box-sizing: border-box;
+  padding: 5px 0;
+  cursor: pointer;
+  margin: 0 3px;
+}
+
+.l-carousel__bar {
+  display: block;
+  height: 1px;
+  border-bottom: 2px solid #ffffff70;
+}
+.l-carousel__button:hover .l-carousel__bar {
+  border-bottom-color: #ffffff99;
+}
+.l-carousel__button.is-current .l-carousel__bar {
+  border-bottom-color: #ffffff;
+}
+
+.l-carousel__arrow-left, .l-carousel__arrow-right {
+  cursor: pointer;
+  background-color: #00000010;
+  width: 35px;
+  height: 35px;
+  border-radius: 50%;
+  color: #ffffff;
+  border: unset;
+  position: absolute;
+  z-index: 1;
+  top: 50%;
+  transform: translateY(-50%);
+  &:hover {
+    transition: background-color .5s linear;
+    background-color: #00000030;
+  }
+}
+.l-carousel__arrow-left {
+  left: 2%;
+}
+.l-carousel__arrow-right {
+  right: 2%;
+}
