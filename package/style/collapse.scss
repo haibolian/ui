@@ -1,3 +1,23 @@
+@import './variables.scss';
 .l-collapse {
   
+}
+
+.l-collapse-item {
+  border: 1px solid $border-color-second;
+  border-bottom: unset;
+  &:last-child{
+    border-bottom: 1px solid $border-color-second;
+  }
+}
+
+.l-collapse-item_head {
+  box-sizing: border-box;
+  height: 40px;
+  padding: 8px 10px;
+  cursor: pointer;
+}
+
+.l-collapse-item_body {
+  padding: 4px 10px;
 }
