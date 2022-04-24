@@ -1,6 +1,6 @@
 @import './variables.scss';
 .l-collapse {
-  
+  background-color: #fff;
 }
 
 .l-collapse-item {
@@ -11,12 +11,20 @@
   }
 }
 
+.l-collapse-item_disabled {
+  color: $text-second;
+  .l-collapse-item_head {
+    cursor: unset;
+  }
+}
+
 .l-collapse-item_head {
   box-sizing: border-box;
   height: 40px;
   padding: 8px 10px;
   cursor: pointer;
 }
+
 
 .l-collapse-item_body {
   max-height: 300px;

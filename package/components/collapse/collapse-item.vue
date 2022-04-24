@@ -1,5 +1,5 @@
 <template>
-  <li class="l-collapse-item">
+  <li :class="['l-collapse-item', disabled ? 'l-collapse-item_disabled' : '']">
     <div class="l-collapse-item_head" @click="clickHead">
       <span class="l-collapse-item_title">{{ title }}</span>
     </div>
@@ -18,24 +18,32 @@ export default defineComponent({
   components:{},
   props:{
     title: String,
-    name: {}
+    name: {},
+    disabled: Boolean
     
   },
   setup(props, ctx){
     const showBody = ref(false)
     const collapseProps = inject('collapseProps')
+    let modelValueCopy = collapseProps.modelValue
+    const isFixed = ref(false)
+    
     watchEffect(()=>{
-      if(collapseProps.accordion){
-        showBody.value = collapseProps.modelValue === props.name
-      } else{
-        if(collapseProps.modelValue.includes(props.name)) showBody.value = true
+      if(modelValueCopy != collapseProps.modelValue){
+        isFixed.value = false
       }
+      if(isFixed.value) return
+      showBody.value = collapseProps.accordion 
+        ? collapseProps.modelValue === props.name
+        : collapseProps.modelValue.includes(props.name)
+      if(props.disabled) isFixed.value = true
     })
 
 
     const toggle = inject('toggle')
 
     const clickHead = () => {
+      if(props.disabled) return
       showBody.value = !showBody.value
       toggle(props.name, showBody.value)
     }

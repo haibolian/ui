@@ -1,12 +1,15 @@
 <script setup lang="ts">
 import { ref } from "vue"
-const show = ref('2')
+const show = ref(['3'])
+const togg = () => {
+  show.value = ['2']
+}
 // test-github
 </script>
 
 <template>
   <div class="root">
-    <!-- {{ show }} -->
+    <l-button @click="togg">asdasd</l-button>
     <LCollapse v-model="show">
       <LCollapseItem title="title1" name="1">
         A
@@ -14,7 +17,7 @@ const show = ref('2')
       <LCollapseItem title="title2" name="2">
         B
       </LCollapseItem>
-      <LCollapseItem title="title3" name="3">
+      <LCollapseItem disabled title="title3" name="3">
         C
       </LCollapseItem>
     </LCollapse>

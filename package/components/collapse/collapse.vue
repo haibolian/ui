@@ -7,15 +7,15 @@
 </template>
 <script lang="js">
 import _ from "lingfun-utils"
-import { defineComponent, ref, provide, readonly, computed, reactive } from 'vue'
+import { defineComponent, ref, provide, readonly, computed, reactive, watch } from 'vue'
 export default defineComponent({
   name:'LCollapse',
   componentName: 'LCollapse',
-  emits:['update:modelValue'],
+  emits:['update:modelValue', 'change'],
   props: {
     accordion: {
       type: Boolean,
-      default: true
+      default: false
     },
     modelValue: {
       type: [Array, String],
@@ -23,12 +23,22 @@ export default defineComponent({
     }
   },
   setup(props, { emit, slots }){
+    // init
     const data = ref(props.modelValue)
-    if(props.accordion){
-      _.getType(data.value) === 'string' ? null : data.value = ''
-    }else{
-      _.getType(data.value) === 'array' ? null : data.value = []
+    const initData =() => {
+      if(props.accordion){
+        _.getType(data.value) === 'string' ? null : data.value = ''
+      }else{
+        _.getType(data.value) === 'array' ? null : data.value = []
+      }
     }
+    initData()
+
+    // 给 v-model 赋值的情况
+    watch(()=>props.modelValue,(newV, oldV)=>{
+      if(newV === oldV) return
+      initData()
+    })
 
     if(props.modelValue !== data.value) emit('update:modelValue', data.value)
     const collapseProps = reactive({
@@ -36,18 +46,22 @@ export default defineComponent({
       accordion: computed(() => props.accordion)
     })
 
+    // 给插槽提供 props，变更时的回调方法
     provide('collapseProps', readonly(collapseProps))
-
     provide('toggle', (name, isOpen) => {
       if(props.accordion){
         data.value = isOpen ? name : ''
       }else{
-        if(isOpen) return !data.value.includes(name) && data.value.push(name)
-        if(data.value.includes(name)){
-          const index = data.value.findIndex(d => d === name)
-          data.value.splice(index,1)
-        } 
+        if(isOpen) {
+          !data.value.includes(name) && data.value.push(name)
+        } else{
+          if(data.value.includes(name)){
+            const index = data.value.findIndex(d => d === name)
+            data.value.splice(index,1)
+          } 
+        }
       }
+      emit('change', data.value)
       emit("update:modelValue", data.value)
     })
 
