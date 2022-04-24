@@ -19,5 +19,7 @@
 }
 
 .l-collapse-item_body {
-  padding: 4px 10px;
+  max-height: 300px;
+  padding: 4px 10px 10px;
+  overflow: auto;
 }

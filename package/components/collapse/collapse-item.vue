@@ -11,7 +11,7 @@
   </li>
 </template>
 <script>
-import { defineComponent, inject, ref, watch, watchEffect } from 'vue'
+import { defineComponent, inject, ref, watchEffect } from 'vue'
 export default defineComponent({
   name:'LCollapseItem',
   componentName:'LCollapseItem',
@@ -47,3 +47,14 @@ export default defineComponent({
   }
 })
 </script>
+<style  scoped>
+  .slide-enter-from, .slide-leave-active{
+    max-height: 0;
+    padding-top: 0;
+    padding-bottom: 0;
+  }
+  
+  .slide-enter-active, .slide-leave-active{
+    transition: all .5s ease;
+  }
+</style>

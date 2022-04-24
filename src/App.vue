@@ -6,7 +6,7 @@ const show = ref('2')
 
 <template>
   <div class="root">
-    {{ show }}
+    <!-- {{ show }} -->
     <LCollapse v-model="show">
       <LCollapseItem title="title1" name="1">
         A
