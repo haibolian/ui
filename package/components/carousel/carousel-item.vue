@@ -1,5 +1,8 @@
 <template>
-  <div :style="itemStyle" class="l-carousel-item">
+  <div :style="itemStyle" :class="{
+    'l-carousel-item': true,
+    'is-transition': needTransition
+    }">
     <slot></slot>
   </div>
 </template>
@@ -18,6 +21,7 @@ const props = defineProps({
 const itemStyle = reactive({
   transform: ''
 })
+const needTransition = ref(false)
 const setTransform = (offset: number, scale = 1) => {
   itemStyle.transform = `translateX(${offset + 'px'}) scale(${scale})`
 }
@@ -29,8 +33,9 @@ onMounted(()=>{
     props,
     setTransform
   })
+  setTimeout(() => {
+    needTransition.value = true
+  });
 })
-
-
 </script>
 

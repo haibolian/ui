@@ -1,18 +1,24 @@
 <template>
   <div :style="carouselStyle" class="l-carousel">
     <div class="l-carousel__wrapper">
-      <button @click="clickLeft" class="l-carousel__arrow-left">
+      <button @click="clickPrev" class="l-carousel__arrow-left">
         <i class="l-icon icon-arrow-left-bold"></i>
       </button>
-      <button @click="clickRight" class="l-carousel__arrow-right">
+      <button @click="clickNext" class="l-carousel__arrow-right">
         <i class="l-icon icon-arrow-right-bold"></i>
       </button>
-      <slot></slot>
+      <div class="l-carousel__card">
+        <slot />
+      </div>
       <ul class="l-carousel__button-group">
+        <!-- 这个 index 是从 1 开始的 -->
         <li 
-          v-for="index in carouselItemsLength" 
-          class="l-carousel__button"
-          @click="clickBar(index - 1)">
+          v-for="(num, index) in itemsLength" 
+          :class="{
+            'l-carousel__button': true,
+            'is-current': index === currentIndex
+          }"
+          @click="clickBar(index)">
           <i class="l-carousel__bar"></i>
         </li>
       </ul>
@@ -27,7 +33,7 @@ export default {
 </script>
 <script setup lang="ts">
 import { formatUnit } from '@/utils/style';
-import { ref, computed, useSlots, provide, getCurrentInstance, onMounted} from 'vue'
+import { ref, computed, useSlots, provide, getCurrentInstance, onMounted, nextTick} from 'vue'
 
 const props = defineProps({
   height: [String, Number]
@@ -38,39 +44,46 @@ const carouselStyle = {
   height: height.value
 }
 
-const getCarouselItems = () => {
-  const slots = useSlots().default?.()?.[0].children.filter(item => item.type?.name === 'LCarouselItem')
-  return slots.map(item => item.type)
-}
-const carouselItems = getCarouselItems()
-const carouselItemsLength = carouselItems.length
-
 // 获取走马灯面板宽度
 const { proxy } = getCurrentInstance()
 const carouselWidth = computed(()=>{
   return proxy.$el?.clientWidth || 0
 })
 
-const currentIndex = ref(1)
+const currentIndex = ref(0)
 const items = ref([])
+const itemsLength = computed(() => items.value.length)
 const addItem = (carouseItemContext: object) => {
   items.value.push(carouseItemContext)
 }
 
 const setOffsetForItems = (targetIndex) => {
   items.value.forEach((item, index) => {
-    if(targetIndex === index) item.setTransform(0, 1);
     const dif = index - targetIndex
     item.setTransform(dif * carouselWidth.value ,1)
   })
+  
   currentIndex.value = targetIndex
 }
 
-const clickLeft = () => {
-  setOffsetForItems(currentIndex.value - 1)
+const getValidTargetIndex = (targetIndex) => {
+  if(targetIndex < 0) return itemsLength.value - 1
+  if(targetIndex > itemsLength.value - 1) return 0
+  return targetIndex
 }
-const clickRight = () => {
-  setOffsetForItems(currentIndex.value + 1)
+
+const getItemByIndex = index => items.value[index]
+const clickPrev = () => {
+  const targetIndex = getValidTargetIndex(currentIndex.value - 1)
+  setOffsetForItems(targetIndex)
+}
+const clickNext = () => {
+  const targetIndex = getValidTargetIndex(currentIndex.value + 1)
+  // if(currentIndex.value === itemsLength.value - 1) {
+
+  // }else{
+    setOffsetForItems(targetIndex)
+  // }
 }
 
 const clickBar = (index) => {

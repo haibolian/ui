@@ -17,6 +17,10 @@
   position: absolute;
 }
 
+.l-carousel-item.is-transition {
+  transition: transform .5s ease;
+}
+
 .l-carousel__button-group {
   padding: 4px 6px;
   position: absolute;
