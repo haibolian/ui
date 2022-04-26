@@ -1,24 +1,32 @@
 <template>
   <LOverlay :show="modelValue">
-    <div v-show="modelValue" class="l-dialog" :style="dialogStyle">
-      <div v-if="title?.length" class="l-dialog-header">
-        <span>{{ title }}</span>
-      </div>
-  
-      <div class="l-dialog-body">
-        <slot />
-      </div>
-  
-      <div v-if="$slots.footer" class="l-dialog-footer">
-        <slot name="footer" />
-      </div>
+    <transition :name="`l-dialog-${transitionType}`">
       <div 
-        v-if="showClose" 
-        class="l-dialog-close"
-        @click="handleClose">
-        <i class="l-icon icon-close"></i>
+        v-show="modelValue" 
+        :class="{
+          'l-dialog': true,
+          'is-fullscreen': fullscreen
+        }"
+        :style="dialogStyle">
+        <div v-if="title?.length" class="l-dialog-header">
+          <span>{{ title }}</span>
+        </div>
+
+        <div class="l-dialog-body">
+          <slot />
+        </div>
+    
+        <div v-if="$slots.footer" class="l-dialog-footer">
+          <slot name="footer" />
+        </div>
+        <div 
+          v-if="showClose" 
+          class="l-dialog-close"
+          @click="handleClose">
+          <i class="l-icon icon-close"></i>
+        </div>
       </div>
-    </div>
+    </transition>
   </LOverlay>
 </template>
 <script lang="ts">
@@ -30,7 +38,8 @@ export default {
 </script>
 <script setup lang="ts">
 import LOverlay from '../overlay/overlay.jsx';
-import { ref, reactive, getCurrentInstance, useAttrs } from "vue"
+// import useClickCoordinate from '@/hooks/useClickCoordinate';
+import { ref, reactive, watchEffect, watch, computed } from "vue"
 
 const emit = defineEmits(['update:modelValue'])
 const props = defineProps({
@@ -50,13 +59,24 @@ const props = defineProps({
   },
   beforeClose: {
     type: Function
+  },
+  fullscreen: Boolean,
+  transitionType: {
+    type: String,
+    default: 'fade'
   }
+
 })
 
-const attrs = useAttrs()
+
 const dialogStyle = reactive({
-  width: props.width
+  width: props.fullscreen ? '100vw' : props.width,
+  height: props.fullscreen ? '100vh' : ''
 })
+
+// 想实现 ant-design-vue 中dialog的动画效果，坐标位置好像不同步，后面有时间再弄吧。先写主体功能。
+// const clickCoordinate = useClickCoordinate() 
+
 
 const handleClose = () => {
   const close = () => { emit('update:modelValue', false) }

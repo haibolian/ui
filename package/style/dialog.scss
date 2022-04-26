@@ -7,15 +7,31 @@
   z-index: 9;
   background-color: #fff;
   border-radius: $border-radius;
-
 }
 
-.l-dialog-header, .l-dialog-body {
-  // border-bottom: 1px solid $border-color-second;
+.l-dialog.is-fullscreen {
+  top: 0;
+}
+
+.l-dialog.is-fullscreen .l-dialog-header {
+  height:50px;
+  border: 1px solid $border-color-second;
+}
+.l-dialog.is-fullscreen .l-dialog-body {
+  height: calc(100vh - 110px);
+  border: 1px solid $border-color-second;
+}
+.l-dialog.is-fullscreen .l-dialog-footer {
+  height:60px;
+  
+}
+
+.l-dialog-header, .l-dialog-body, .l-dialog-footer {
+  box-sizing: border-box;
 }
 
 .l-dialog-body {
-  padding: 30px 20px;
+  padding: 25px 20px;
 }
 
 .l-dialog-header {
@@ -24,9 +40,10 @@
 }
 
 .l-dialog-footer {
-  padding: 10px 20px 20px;
+  padding: 15px 20px 15px;
   display: flex;
   justify-content: flex-end;
+  align-items: center;
 }
 
 .l-dialog-close {
@@ -36,6 +53,17 @@
   cursor: pointer;
 }
 
-.l-dialog-header {
+// transition
+.l-dialog-fade-enter-from {
+  top: 13%;
+}
+.l-dialog-fade-enter-active {
+  transition: top .2s ease;
+}
 
+.l-dialog-fade-leave-to {
+  top: 13%;
+}
+.l-dialog-fade-leave-active {
+  transition: top .2s ease;
 }
