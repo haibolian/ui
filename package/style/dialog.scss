@@ -1,0 +1,41 @@
+@import './variables.scss';
+.l-dialog {
+  position: fixed;
+  top: 15%;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 9;
+  background-color: #fff;
+  border-radius: $border-radius;
+
+}
+
+.l-dialog-header, .l-dialog-body {
+  // border-bottom: 1px solid $border-color-second;
+}
+
+.l-dialog-body {
+  padding: 30px 20px;
+}
+
+.l-dialog-header {
+  padding: 15px 20px 5px;
+  font-weight: bold;
+}
+
+.l-dialog-footer {
+  padding: 10px 20px 20px;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.l-dialog-close {
+  position: absolute;
+  right: 20px;
+  top: 15px;
+  cursor: pointer;
+}
+
+.l-dialog-header {
+
+}
