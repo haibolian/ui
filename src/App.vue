@@ -1,17 +1,39 @@
-<script setup lang="ts">
-// test-github
-</script>
-
 <template>
   <div class="root">
-    <l-carousel height="150">
-      <l-carousel-item v-for="item in 4" :key="item">
-        <h3 class="small">{{ item }}</h3>
-      </l-carousel-item>
-    </l-carousel>
+    <l-button type="text" @click="dialogVisible = true"
+      >click to open the Dialog</l-button
+    >
+
+    <l-dialog
+      v-model="dialogVisible"
+      title="Tips"
+      width="30%"
+      :before-close="handleClose"
+    >
+      <span>This is a message</span>
+      <template #footer>
+          <l-button size="small" @click="dialogVisible = false">取消</l-button>
+          <l-button size="small" type="primary" @click="dialogVisible = false"
+            >确定</l-button
+          >
+      </template>
+    </l-dialog>
   </div>
 </template>
-
+<script>
+  export default {
+    data() {
+      return {
+        dialogVisible: false
+      };
+    },
+    methods: {
+      handleClose(done) {
+        done()
+      }
+    }
+  };
+</script>
 <style>
 .root {
   
@@ -20,7 +42,8 @@
   justify-content: center;
   align-items: center; */
 }
-.l-carousel-item h3 {
+
+/* .l-carousel-item h3 {
   color: #475669;
   font-size: 14px;
   opacity: 0.75;
@@ -35,5 +58,5 @@
 
 .l-carousel-item:nth-child(2n + 1) {
   background-color: #d3dce6;
-}
+} */
 </style>
