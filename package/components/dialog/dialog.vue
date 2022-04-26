@@ -1,7 +1,7 @@
 <template>
-  <LOverlay :show="modelValue">
+  <LOverlay :disabled="!modal" :show="modelValue">
     <transition :name="`l-dialog-${transitionType}`">
-      <div 
+      <div
         v-show="modelValue" 
         :class="{
           'l-dialog': true,
@@ -39,7 +39,7 @@ export default {
 <script setup lang="ts">
 import LOverlay from '../overlay/overlay.jsx';
 // import useClickCoordinate from '@/hooks/useClickCoordinate';
-import { ref, reactive, watchEffect, watch, computed } from "vue"
+import { ref, reactive, watch, computed } from "vue"
 
 const emit = defineEmits(['update:modelValue'])
 const props = defineProps({
@@ -64,14 +64,22 @@ const props = defineProps({
   transitionType: {
     type: String,
     default: 'fade'
-  }
+  },
+  modal: {
+    type: Boolean,
+    default: true
+  },
+  // top: {
+  //   type: String,
+  //   default: '15vh'
+  // }
 
 })
 
-
 const dialogStyle = reactive({
   width: props.fullscreen ? '100vw' : props.width,
-  height: props.fullscreen ? '100vh' : ''
+  height: props.fullscreen ? '100vh' : '',
+  // top: props.top || '15vh'
 })
 
 // 想实现 ant-design-vue 中dialog的动画效果，坐标位置好像不同步，后面有时间再弄吧。先写主体功能。

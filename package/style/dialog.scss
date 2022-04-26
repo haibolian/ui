@@ -1,12 +1,13 @@
 @import './variables.scss';
 .l-dialog {
   position: fixed;
-  top: 15%;
+  top: 15vh;
   left: 50%;
   transform: translateX(-50%);
   z-index: 9;
   background-color: #fff;
   border-radius: $border-radius;
+  box-shadow: $box-shadow-base;
 }
 
 .l-dialog.is-fullscreen {
@@ -55,15 +56,15 @@
 
 // transition
 .l-dialog-fade-enter-from {
-  top: 13%;
+  top: 13vh;
 }
 .l-dialog-fade-enter-active {
-  transition: top .2s ease;
+  transition: top .3s ease;
 }
 
 .l-dialog-fade-leave-to {
-  top: 13%;
+  top: 13vh;
 }
 .l-dialog-fade-leave-active {
-  transition: top .2s ease;
+  transition: top .3s ease;
 }
