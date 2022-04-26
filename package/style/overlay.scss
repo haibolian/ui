@@ -6,6 +6,11 @@
   height: 100vh;
   background-color: #11111140;
 }
+.l-overlay__disabled {
+  width: unset;
+  height: unset;
+  background-color: unset;
+}
 
 .l-overlay-enter-from {
   opacity: 0;
