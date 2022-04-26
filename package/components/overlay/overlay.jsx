@@ -1,4 +1,4 @@
-import { Teleport } from "vue";
+import { Teleport, Transition } from "vue";
 
 export default {
   name: 'LOverlay',
@@ -9,9 +9,11 @@ export default {
     
     return () => (
       <Teleport to="body">
-      <div v-show={ props.show } class="l-overlay">
-        { slots.default() }
-      </div>
+        <Transition name="l-overlay">
+          <div v-show={ props.show } class="l-overlay">
+            { slots.default() }
+          </div>
+        </Transition>
     </Teleport>
     )
   },

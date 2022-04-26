@@ -6,3 +6,19 @@
   height: 100vh;
   background-color: #11111140;
 }
+
+.l-overlay-enter-from {
+  opacity: 0;
+}
+
+.l-overlay-enter-active {
+  transition: opacity .1s ease-out;
+}
+
+.l-overlay-leave-to {
+  opacity: 0;
+}
+
+.l-overlay-leave-active {
+  transition: opacity .1s ease-out;
+}
